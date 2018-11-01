@@ -19,13 +19,13 @@ This is just a teaser. There are 27 customizable variables in total! This sugar 
 
 ### Installing the theme
 
-######From KDE Plasma
+###### From KDE Plasma
 
 If you are on [KDE Plasma](https://www.kde.org/plasma-desktop)—by default [openSuse](https://www.opensuse.org/), [Neon](https://neon.kde.org/), [Kubuntu](https://kubuntu.org/), [KaOS](https://kaosx.us/) or [Chakra](https://www.chakralinux.org/) for example—you are lucky and can simply go to your system settings and under "Startup and Shutdown" followed by "Login Screen (SDDM)" click "Get New Theme". From there search for "Sugar Light" and install.
 
 If for some reason you cannot find the category named "Login Screen (SDDM)" in your system settings then you are missing `sddm-kcm`. Install this little helper with your package manager first. You will be grateful you did.
 
-######From other desktop environments
+###### From other desktop environments
 
 [Download the tar archive from openDesktop](https://www.opendesktop.org/p/1240784) and extract the contents to the theme directory of SDDM *(change the path for the downloaded file if necessary)*:
 ```
