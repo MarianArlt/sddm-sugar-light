@@ -6,7 +6,7 @@ Sugar is extremely customizable and so sweet it will probably cause you diabetes
 With those principles in mind Sugar was written completely from scratch making it clean and simple not only by looks but by design too.  
 All controls use the **latest [Qt Quick Controls 2](http://doc.qt.io/qt-5/qtquickcontrols2-index.html)** for [increased performance](https://blog.qt.io/blog/2015/03/31/qt-quick-controls-for-embedded/) on low end or even embedded systems.
 
-To learn how to control sugar levels you should check the [Sugar Wiki on Github](https://github.com/MarianArlt/sddm-sugar-light/wiki/Before-you-begin) or the very well documented and included `theme.conf`.
+To learn how to control sugar levels you should check the [Sugar Wiki on Github](https://github.com/MarianArlt/sddm-sugar-light/wiki/Before-you-begin) or the very well documented and included [`theme.conf`](theme.conf).
 Here are some previews of nifty variable names you can set/unset/change to customize your sugar:
 `ThemeColor`, `Font`, `HourFormat`, `ForceRightToLeft`, `TranslateUsernamePlaceholder`
 This is just a teaser. There are 27 customizable variables in total! This sugar will be yours and only yours.  
