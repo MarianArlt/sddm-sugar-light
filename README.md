@@ -1,4 +1,4 @@
-![Screenshot of the theme](preview.png "Interface preview of Sugar Light for SDDM")
+<img src="https://raw.githubusercontent.com/MarianArlt/sddm-sugar-light/master/preview.png" width="800" height="500">
 
 # Sugar Light login theme for SDDM
 
