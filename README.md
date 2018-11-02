@@ -10,6 +10,8 @@ To learn how to control sugar levels you should check the [Sugar Wiki on Github]
 Here are some previews of nifty variable names you can set/unset/change to customize your sugar:
 `ThemeColor`, `Font`, `HourFormat`, `ForceRightToLeft`, `TranslateUsernamePlaceholder`
 This is just a teaser. There are 27 customizable variables in total! This sugar will be yours and only yours.  
+Sugar comes in two flavors. This one is for the milky sweet. You can also check out [Sugar Dark](https://www.opendesktop.org/p/1272122/).  
+
 
 ### Dependencies
 
