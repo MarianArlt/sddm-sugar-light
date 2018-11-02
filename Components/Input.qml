@@ -131,12 +131,41 @@ Column {
                 anchors.left: indicator.right
                 anchors.leftMargin: indicator.width / 2
                 font.pointSize: root.font.pointSize * 0.75
-                color: parent.down ? root.palette.text : parent.visualFocus | parent.hovered ? Qt.lighter(root.palette.text, 1.5) : root.palette.text
+                color: parent.down ? root.palette.text : parent.visualFocus | parent.hovered ? Qt.lighter(root.palette.text, 1.8) : root.palette.text
             }
 
             Keys.onReturnPressed: toggle()
             KeyNavigation.down: loginButton
         }
+
+        states: [
+            State {
+                name: "pressed"
+                when: revealSecret.down
+                PropertyChanges {
+                    target: revealSecret.contentItem
+                    color: Qt.lighter(root.palette.text, 1.2)
+                }
+            },
+            State {
+                name: "focused"
+                when: revealSecret.hovered || revealSecret.visualFocus
+                PropertyChanges {
+                    target: revealSecret.contentItem
+                    color: Qt.lighter(root.palette.text, 1.8)
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                PropertyAnimation {
+                    properties: "color"
+                    duration: 150
+                }
+            }
+        ]
+
     }
 
     Item {
@@ -194,12 +223,62 @@ Column {
 
             background: Rectangle {
                 id: buttonBackground
-                opacity: enabled ? 1 : 0.2
-                color: !enabled ? "#999999" : parent.down ? "#222222" : parent.visualFocus | parent.hovered ? config.LoginHoverColor : root.palette.text
-                border.color: !enabled ? "#999999" : parent.down ? "#222222" : parent.visualFocus | parent.hovered ? config.LoginHoverColor : root.palette.text
-                border.width: 1
-                radius: config.RoundCorners || undefined
+                color: root.palette.text
+                radius: config.RoundCorners || 0
             }
+
+            states: [
+                State {
+                    name: "disabled"
+                    when: !loginButton.enabled
+                    PropertyChanges {
+                        target: buttonBackground
+                        color: "#888888"
+                    }
+                },
+                State {
+                    name: "focused"
+                    when: loginButton.visualFocus
+                    PropertyChanges {
+                        target: buttonBackground
+                        color: config.LoginHoverColor || "orange"
+                    }
+                },
+                State {
+                    name: "hovered"
+                    when: loginButton.hovered
+                    PropertyChanges {
+                        target: buttonBackground
+                        color: Qt.lighter(config.LoginHoverColor, 1.2) || Qt.lighter("orange", 1.2)
+                    }
+                },
+                State {
+                    name: "pressed"
+                    when: loginButton.down
+                    PropertyChanges {
+                        target: buttonBackground
+                        color: "#333333"
+                    }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    PropertyAnimation {
+                        target: buttonBackground
+                        properties: "color"
+                        duration: 100
+                    }
+                },
+                Transition {
+                    from: "disabled"; to: ""
+                    PropertyAnimation {
+                        target: buttonBackground
+                        properties: "color"
+                        duration: 500
+                    }
+                }
+            ]
 
             Keys.onReturnPressed: clicked()
             onClicked: username.text !== "" && password.text !== "" ? sddm.login(username.text, password.text, sessionSelector.selectedSession) : sddm.loginFailed()

@@ -63,7 +63,7 @@ Item {
         contentItem: Text {
             id: displayedItem
             text: (config.TranslateSession || (textConstantSession + ":")) + " " + selectSession.currentText
-            color: parent.down ? root.palette.text : parent.hovered ? Qt.lighter(root.palette.text, 1.5) : root.palette.text
+            color: root.palette.text // parent.down ? root.palette.text : parent.hovered ? Qt.lighter(root.palette.text, 1.8) : root.palette.text
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignLeft
             font.pointSize: root.font.pointSize * 0.8
@@ -72,7 +72,7 @@ Item {
         background: Rectangle {
             color: "transparent"
             border.width: parent.visualFocus ? 1 : 0
-            border.color: parent.visualFocus ? root.palette.text : "transparent"
+            border.color: "transparent" // parent.visualFocus ? root.palette.text : "transparent"
             height: parent.visualFocus ? 2 : 0
             width: displayedItem.implicitWidth
             anchors.top: parent.bottom
@@ -107,6 +107,42 @@ Item {
                 NumberAnimation { property: "opacity"; from: 0; to: 1 }
             }
         }
+
+        states: [
+            State {
+                name: "pressed"
+                when: selectSession.down
+                PropertyChanges {
+                    target: displayedItem
+                    color: Qt.lighter(root.palette.text, 1.1)
+                }
+                PropertyChanges {
+                    target: selectSession.background
+                    border.color: Qt.lighter(root.palette.text, 1.3)
+                }
+            },
+            State {
+                name: "focused"
+                when: selectSession.hovered || selectSession.visualFocus
+                PropertyChanges {
+                    target: displayedItem
+                    color: Qt.lighter(root.palette.text, 1.8)
+                }
+                PropertyChanges {
+                    target: selectSession.background
+                    border.color: Qt.lighter(root.palette.text, 2)
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                PropertyAnimation {
+                    properties: "color, border.color"
+                    duration: 150
+                }
+            }
+        ]
 
     }
 

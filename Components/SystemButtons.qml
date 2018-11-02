@@ -46,13 +46,13 @@ RowLayout {
             display: AbstractButton.TextUnderIcon
             opacity: modelData[2] ? 1 : 0.3
             hoverEnabled: true
-            palette.buttonText: down ? Qt.lighter("red", 1.1) : hovered ? Qt.lighter("red", 1.4) : visualFocus ? Qt.lighter("red", 1.2) : root.palette.text
+            palette.buttonText: root.palette.text
             background: Rectangle {
                 height: 2
                 color: "transparent"
                 width: parent.width
                 border.width: parent.visualFocus ? 1 : 0
-                border.color: parent.hovered ? Qt.lighter("red", 1.5) : parent.visualFocus ? Qt.lighter("red", 1.3) : "transparent"
+                border.color: "transparent"
                 anchors.top: parent.bottom
             }
             Keys.onReturnPressed: clicked()
@@ -62,6 +62,54 @@ RowLayout {
             }
             KeyNavigation.up: exposedLogin
             KeyNavigation.left: index == 0 ? exposedLogin : parent.children[index-1]
+
+            states: [
+                State {
+                    name: "pressed"
+                    when: parent.children[index].down
+                    PropertyChanges {
+                        target: parent.children[index]
+                        palette.buttonText: Qt.lighter("red", 1.1)
+                    }
+                    PropertyChanges {
+                        target: parent.children[index].background
+                        border.color: Qt.lighter("red", 1.3)
+                    }
+                },
+                State {
+                    name: "hovered"
+                    when: parent.children[index].hovered
+                    PropertyChanges {
+                        target: parent.children[index]
+                        palette.buttonText: Qt.lighter("red", 1.5)
+                    }
+                    PropertyChanges {
+                        target: parent.children[index].background
+                        border.color: Qt.lighter("red", 1.7)
+                    }
+                },
+                State {
+                    name: "focused"
+                    when: parent.children[index].visualFocus
+                    PropertyChanges {
+                        target: parent.children[index]
+                        palette.buttonText: Qt.lighter("red", 1.3)
+                    }
+                    PropertyChanges {
+                        target: parent.children[index].background
+                        border.color: Qt.lighter("red", 1.5)
+                    }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    PropertyAnimation {
+                        properties: "palette.buttonText, border.color"
+                        duration: 150
+                    }
+                }
+            ]
 
         }
 
