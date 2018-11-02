@@ -47,7 +47,7 @@ Column {
                 color: "transparent"
                 border.color: root.palette.text
                 border.width: parent.activeFocus ? 2 : 1
-                radius: config.RoundCorners || undefined
+                radius: config.RoundCorners || 0
             }
             Keys.onReturnPressed: loginButton.clicked()
             KeyNavigation.down: password
@@ -89,7 +89,7 @@ Column {
                 color: "transparent"
                 border.color: root.palette.text
                 border.width: parent.activeFocus ? 2 : 1
-                radius: config.RoundCorners || undefined
+                radius: config.RoundCorners || 0
             }
             Keys.onReturnPressed: loginButton.clicked()
             KeyNavigation.down: revealSecret
@@ -237,11 +237,11 @@ Column {
                     }
                 },
                 State {
-                    name: "focused"
-                    when: loginButton.visualFocus
+                    name: "pressed"
+                    when: loginButton.down
                     PropertyChanges {
                         target: buttonBackground
-                        color: config.LoginHoverColor || "orange"
+                        color: "#444444"
                     }
                 },
                 State {
@@ -253,29 +253,29 @@ Column {
                     }
                 },
                 State {
-                    name: "pressed"
-                    when: loginButton.down
+                    name: "focused"
+                    when: loginButton.visualFocus
                     PropertyChanges {
                         target: buttonBackground
-                        color: "#333333"
+                        color: config.LoginHoverColor || "orange"
                     }
                 }
             ]
 
             transitions: [
                 Transition {
-                    PropertyAnimation {
-                        target: buttonBackground
-                        properties: "color"
-                        duration: 100
-                    }
-                },
-                Transition {
                     from: "disabled"; to: ""
                     PropertyAnimation {
                         target: buttonBackground
                         properties: "color"
                         duration: 500
+                    }
+                },
+                Transition {
+                    PropertyAnimation {
+                        target: buttonBackground
+                        properties: "color"
+                        duration: 100
                     }
                 }
             ]
