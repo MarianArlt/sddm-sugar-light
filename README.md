@@ -1,4 +1,4 @@
-![Screenshot of the interface of the Sugar Light theme for SDDM](preview.jpg "The default interface of the Sugar Light theme for SDDM")
+![Screenshot of the interface of the Sugar Light theme for SDDM](Preview.jpg "The default interface of the Sugar Light theme for SDDM")
 
 # Sugar Light login theme for SDDM
 
@@ -53,6 +53,8 @@ Sugar Light is free software: you can redistribute it and/or modify it under the
 Sugar Light is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.  
 
 You should have received a copy of the GNU General Public License along with Sugar Light. If not, see <https://www.gnu.org/licenses/>.
+
+[Mockup psd created by Qeaql-studio - Freepik.com](https://www.freepik.com/free-photos-vectors/mockup)
 
 ### Other awesome projects
 
