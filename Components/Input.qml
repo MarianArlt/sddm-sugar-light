@@ -64,6 +64,30 @@ Column {
             icon.color: root.palette.text
             icon.source: Qt.resolvedUrl("../Assets/User.svgz")
         }
+
+        states: [
+            State {
+                name: "focused"
+                when: username.activeFocus
+                PropertyChanges {
+                    target: username.background
+                    border.color: config.AccentColor
+                }
+                PropertyChanges {
+                    target: username
+                    color: config.AccentColor
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                PropertyAnimation {
+                    properties: "color, border.color"
+                    duration: 150
+                }
+            }
+        ]
     }
 
     Item {
@@ -94,6 +118,30 @@ Column {
             Keys.onReturnPressed: loginButton.clicked()
             KeyNavigation.down: revealSecret
         }
+
+        states: [
+            State {
+                name: "focused"
+                when: password.activeFocus
+                PropertyChanges {
+                    target: password.background
+                    border.color: config.AccentColor
+                }
+                PropertyChanges {
+                    target: password
+                    color: config.AccentColor
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                PropertyAnimation {
+                    properties: "color, border.color"
+                    duration: 150
+                }
+            }
+        ]
     }
 
     Item {
@@ -116,22 +164,24 @@ Column {
                 border.color: root.palette.text
                 border.width: parent.visualFocus ? 2 : 1
                 Rectangle {
+                    id: dot
                     anchors.centerIn: parent
                     implicitHeight: parent.width - 6
                     implicitWidth: parent.width - 6
                     color: root.palette.text
-                    visible: revealSecret.checked
+                    opacity: revealSecret.checked ? 1 : 0
                 }
             }
 
             contentItem: Text {
+                id: indicatorLabel
                 text: config.TranslateShowPassword || "Show Password"
                 anchors.verticalCenter: indicator.verticalCenter
                 horizontalAlignment: Text.AlignLeft
                 anchors.left: indicator.right
                 anchors.leftMargin: indicator.width / 2
                 font.pointSize: root.font.pointSize * 0.75
-                color: parent.down ? root.palette.text : parent.visualFocus | parent.hovered ? Qt.lighter(root.palette.text, 1.8) : root.palette.text
+                color: root.palette.text
             }
 
             Keys.onReturnPressed: toggle()
@@ -144,15 +194,47 @@ Column {
                 when: revealSecret.down
                 PropertyChanges {
                     target: revealSecret.contentItem
-                    color: Qt.lighter(root.palette.text, 1.2)
+                    color: Qt.darker(config.AccentColor, 1.2)
+                }
+                PropertyChanges {
+                    target: dot
+                    color: Qt.darker(config.AccentColor, 1.2)
+                }
+                PropertyChanges {
+                    target: indicator
+                    border.color: Qt.darker(config.AccentColor, 1.2)
+                }
+            },
+            State {
+                name: "hovered"
+                when: revealSecret.hovered
+                PropertyChanges {
+                    target: indicatorLabel
+                    color: Qt.lighter(config.AccentColor, 1.3)
+                }
+                PropertyChanges {
+                    target: indicator
+                    border.color: Qt.lighter(config.AccentColor, 1.3)
+                }
+                PropertyChanges {
+                    target: dot
+                    color: Qt.lighter(config.AccentColor, 1.3)
                 }
             },
             State {
                 name: "focused"
-                when: revealSecret.hovered || revealSecret.visualFocus
+                when: revealSecret.visualFocus
                 PropertyChanges {
-                    target: revealSecret.contentItem
-                    color: Qt.lighter(root.palette.text, 1.8)
+                    target: indicatorLabel
+                    color: config.AccentColor
+                }
+                PropertyChanges {
+                    target: indicator
+                    border.color: config.AccentColor
+                }
+                PropertyChanges {
+                    target: dot
+                    color: config.AccentColor
                 }
             }
         ]
@@ -160,7 +242,7 @@ Column {
         transitions: [
             Transition {
                 PropertyAnimation {
-                    properties: "color"
+                    properties: "color, border.color, opacity"
                     duration: 150
                 }
             }
@@ -249,7 +331,7 @@ Column {
                     when: loginButton.hovered
                     PropertyChanges {
                         target: buttonBackground
-                        color: Qt.lighter(config.LoginHoverColor, 1.2) || Qt.lighter("orange", 1.2)
+                        color: Qt.lighter(config.AccentColor, 1.2) || Qt.lighter("orange", 1.2)
                     }
                 },
                 State {
@@ -257,7 +339,7 @@ Column {
                     when: loginButton.visualFocus
                     PropertyChanges {
                         target: buttonBackground
-                        color: config.LoginHoverColor || "orange"
+                        color: config.AccentColor
                     }
                 }
             ]
@@ -266,14 +348,12 @@ Column {
                 Transition {
                     from: "disabled"; to: ""
                     PropertyAnimation {
-                        target: buttonBackground
                         properties: "color"
                         duration: 500
                     }
                 },
                 Transition {
                     PropertyAnimation {
-                        target: buttonBackground
                         properties: "color"
                         duration: 100
                     }

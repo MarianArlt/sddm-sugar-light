@@ -114,23 +114,35 @@ Item {
                 when: selectSession.down
                 PropertyChanges {
                     target: displayedItem
-                    color: Qt.lighter(root.palette.text, 1.1)
+                    color: Qt.lighter(config.AccentColor, 1.1)
                 }
                 PropertyChanges {
                     target: selectSession.background
-                    border.color: Qt.lighter(root.palette.text, 1.3)
+                    border.color: Qt.lighter(config.AccentColor, 1.1)
+                }
+            },
+            State {
+                name: "hovered"
+                when: selectSession.hovered
+                PropertyChanges {
+                    target: displayedItem
+                    color: Qt.lighter(config.AccentColor, 1.3)
+                }
+                PropertyChanges {
+                    target: selectSession.background
+                    border.color: Qt.lighter(config.AccentColor, 1.3)
                 }
             },
             State {
                 name: "focused"
-                when: selectSession.hovered || selectSession.visualFocus
+                when: selectSession.visualFocus
                 PropertyChanges {
                     target: displayedItem
-                    color: Qt.lighter(root.palette.text, 1.8)
+                    color: config.AccentColor
                 }
                 PropertyChanges {
                     target: selectSession.background
-                    border.color: Qt.lighter(root.palette.text, 2)
+                    border.color: config.AccentColor
                 }
             }
         ]
