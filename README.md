@@ -31,7 +31,7 @@ If for some reason you cannot find the category named "Login Screen (SDDM)" in y
 
 [Download the tar archive from openDesktop](https://www.opendesktop.org/p/1240784) and extract the contents to the theme directory of SDDM *(change the path for the downloaded file if necessary)*:
 ```
-$ sudo tar -xzvf ~/Downloads/sddm-chili.tar.gz -C /usr/share/sddm/themes
+$ sudo tar -xzvf ~/Downloads/sugar-light.tar.gz -C /usr/share/sddm/themes
 ```
 This will extract all the files to a folder called "sugar-light" inside of the themes directory of SDDM.  
 
